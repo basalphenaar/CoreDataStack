@@ -12,15 +12,14 @@ extension Bundle {
     static private let modelExtension = "momd"
     /**
      Attempts to return an instance of NSManagedObjectModel for a given name within the bundle.
-
+     
      - parameter name: The file name of the model without the extension.
      - returns: The NSManagedObjectModel from the bundle with the given name.
      **/
     public func managedObjectModel(name: String) -> NSManagedObjectModel {
-        guard let URL = url(forResource: name, withExtension: Bundle.modelExtension),
-            let model = NSManagedObjectModel(contentsOf: URL) else {
-                preconditionFailure("Model not found or corrupted with name: \(name) in bundle: \(self)")
+        guard let URL = url(forResource: name, withExtension: Bundle.modelExtension) else {
+            preconditionFailure("Model not found or corrupted with name: \(name) in bundle: \(self)")
         }
-        return model
+        return NSManagedObjectModel(contentsOf: URL)
     }
 }
